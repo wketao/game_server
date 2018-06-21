@@ -1,0 +1,22 @@
+#环境变量
+
+#数据库密码
+DB_PASSWORD=tlbb1234
+
+#mysql版本
+MYSQL_IMAGE_VERSION=5.5
+
+#容器时区
+TIME_ZONE=Asia/Shanghai
+
+#ubuntu镜像url
+#中国大陆:	mirrors.aliyun.com
+#不使用镜像加速时留空
+UBUNTU_APT_MIRROR_URL=mirrors.aliyun.com
+
+#Windows服务器billing服务器ip、端口
+BILLING_IP=192.168.1.110
+BILLING_PORT=12680
+
+#游戏服务器端口
+GAME_SERVER_PORT=7384

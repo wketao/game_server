@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+    db_server:
+        image: mysql:${MYSQL_IMAGE_VERSION}
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
+            TZ: ${TIME_ZONE}
+        volumes:
+            - ./mysql/data:/var/lib/mysql:rw
+            - ./image/mysql/web.sql:/docker-entrypoint-initdb.d/web.sql:ro
+            - ./image/mysql/tlbbdb.sql:/docker-entrypoint-initdb.d/tlbbdb.sql:ro
+        ports:
+            - "3306:3306"
+        container_name: db_server
+        hostname: db_server
+        
+    game_server:
+        image: liuguangw/game_server:latest
+        restart: always
+        volumes:
+            - ./home:/home:rw
+        working_dir: /home
+        environment:
+            TZ: ${TIME_ZONE}
+            BILLING_IP: ${BILLING_IP}
+            BILLING_PORT: ${BILLING_PORT}
+            DB_PASSWORD: "${DB_PASSWORD}"
+        ports:
+            - "${GAME_SERVER_PORT}:7384"
+        cap_add:
+            - ALL
+        privileged: true
+        container_name: game_server
+        hostname: game_server
