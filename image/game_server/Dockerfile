@@ -1,5 +1,5 @@
 FROM ubuntu:14.04
-COPY config /root/config
+ADD config.tar.gz /root/
 COPY files /root/files
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 ARG UBUNTU_APT_MIRROR_URL=
