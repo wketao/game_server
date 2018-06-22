@@ -27,8 +27,10 @@ services:
             BILLING_IP: ${BILLING_IP}
             BILLING_PORT: ${BILLING_PORT}
             DB_PASSWORD: "${DB_PASSWORD}"
+            GAME_SERVER_IP: ${GAME_SERVER_IP}
         ports:
             - "${GAME_SERVER_PORT}:7384"
+            - "3731:3731"
         cap_add:
             - ALL
         privileged: true

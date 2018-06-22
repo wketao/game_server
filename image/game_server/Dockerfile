@@ -23,6 +23,6 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 	&& ldconfig \
 	&& myodbc-installer -a -d -n "MySQL ODBC 5.3 Driver" -t "Driver=/usr/local/lib/libmyodbc5w.so" \
 	&& myodbc-installer -d -l
-EXPOSE 7384
+EXPOSE 7384 3731
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["tail","-f","/dev/null"]
