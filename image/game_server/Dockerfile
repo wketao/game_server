@@ -1,5 +1,6 @@
 FROM ubuntu:14.04
 COPY config /root/config
+COPY files /root/files
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 ARG UBUNTU_APT_MIRROR_URL=
 RUN chmod a+x /usr/local/bin/docker-entrypoint \
@@ -8,10 +9,19 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 		sed  -i "s#archive.ubuntu.com#${UBUNTU_APT_MIRROR_URL}#g"  /etc/apt/sources.list; \
 	fi \
 	&& dpkg --add-architecture i386 \
-	&& apt-get update
-RUN apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386 unixodbc:i386 unixodbc-dev:i386 libmyodbc:i386 mysql-client ; exit 0
-RUN rm -rf /usr/share/libtool/libltdl/Makefile.in /var/cache/apt/archives/libltdl-dev_*ubuntu1_i386.deb
-RUN apt-get install -y -f ; exit 0
+	&& apt-get update \
+	&& apt-get install -y libc6:i386 libstdc++6:i386 \
+	&& cd /root/files \
+	&& tar -zxf unixODBC-so.tar.gz \
+	&& cp -Rf unixODBC /usr/local/ \
+	&& echo "/usr/local/unixODBC/lib">>/etc/ld.so.conf \
+	&& ldconfig \
+	&& tar -zxf mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit.tar.gz \
+	&& cd mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit \
+	&& cp bin/* /usr/local/bin \
+	&& cp lib/* /usr/local/lib \
+	&& myodbc-installer -a -d -n "MySQL ODBC 5.3 Driver" -t "Driver=/usr/local/lib/libmyodbc5w.so" \
+	&& myodbc-installer -d -l
 EXPOSE 7384
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["tail","-f","/dev/null"]
