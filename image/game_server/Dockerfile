@@ -15,11 +15,11 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 	&& tar -zxf unixODBC-so.tar.gz \
 	&& cp -Rf unixODBC /usr/local/ \
 	&& echo "/usr/local/unixODBC/lib">>/etc/ld.so.conf \
-	&& ldconfig \
 	&& tar -zxf mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit.tar.gz \
 	&& cd mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit \
 	&& cp bin/* /usr/local/bin \
 	&& cp lib/* /usr/local/lib \
+	&& ldconfig \
 	&& myodbc-installer -a -d -n "MySQL ODBC 5.3 Driver" -t "Driver=/usr/local/lib/libmyodbc5w.so" \
 	&& myodbc-installer -d -l
 EXPOSE 7384
