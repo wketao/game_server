@@ -16,6 +16,7 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 	&& cp -Rf unixODBC /usr/local/ \
 	&& echo "/usr/local/unixODBC/lib">>/etc/ld.so.conf \
 	&& tar -zxf mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit.tar.gz \
+	&& ln -s /usr/local/unixODBC/lib/libodbc.so.2.0.0 /usr/lib/i386-linux-gnu/libodbc.so.1 \
 	&& cd mysql-connector-odbc-5.3.10-linux-ubuntu14.04-x86-32bit \
 	&& cp bin/* /usr/local/bin \
 	&& cp lib/* /usr/local/lib \
