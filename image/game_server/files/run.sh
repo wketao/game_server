@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ulimit -n 65535
 if ps aux | grep -i "./ShareMemory" | grep -v grep >/dev/null 2>&1;then
   echo " ShareMemory  is running !!!!!!"

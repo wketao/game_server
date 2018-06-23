@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ###### stop Server ######
 cd /home/tlbb/Server && touch quitserver.cmd
 echo " stopping Server ......"
