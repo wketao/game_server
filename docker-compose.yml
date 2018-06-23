@@ -24,8 +24,6 @@ services:
         working_dir: /home
         environment:
             TZ: ${TIME_ZONE}
-            BILLING_IP: ${BILLING_IP}
-            BILLING_PORT: ${BILLING_PORT}
             DB_PASSWORD: "${DB_PASSWORD}"
             GAME_SERVER_IP: ${GAME_SERVER_IP}
         ports:

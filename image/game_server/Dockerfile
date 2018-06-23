@@ -12,6 +12,10 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 	&& apt-get update \
 	&& apt-get install -y libc6:i386 libstdc++6:i386 \
 	&& cd /root/files \
+	&& chmod a+x run.sh stop.sh \
+	&& ln -s /root/files/run.sh /usr/local/bin/run_gs \
+	&& ln -s /root/files/stop.sh /usr/local/bin/stop_gs \
+	&& chmod a+x /root/files/billing/Billing \
 	&& tar -zxf unixODBC-so.tar.gz \
 	&& cp -Rf unixODBC /usr/local/ \
 	&& echo "/usr/local/unixODBC/lib">>/etc/ld.so.conf \
