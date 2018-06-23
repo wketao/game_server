@@ -44,7 +44,7 @@ else
   ###### start Server ######
   cd /home/tlbb/Server/
   echo " start Server ......"
-    ./Server &
+  ./Server
 
   #until
   #[ "$?" = "1" ]
