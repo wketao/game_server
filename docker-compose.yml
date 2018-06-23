@@ -9,8 +9,8 @@ services:
             TZ: ${TIME_ZONE}
         volumes:
             - ./mysql/data:/var/lib/mysql:rw
-            - ./image/mysql/web.sql:/docker-entrypoint-initdb.d/web.sql:ro
-            - ./image/mysql/tlbbdb.sql:/docker-entrypoint-initdb.d/tlbbdb.sql:ro
+            - ./mysql/web.sql:/docker-entrypoint-initdb.d/web.sql:ro
+            - ./mysql/tlbbdb.sql:/docker-entrypoint-initdb.d/tlbbdb.sql:ro
         ports:
             - "3306:3306"
         container_name: db_server
