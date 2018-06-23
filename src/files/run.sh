@@ -51,8 +51,5 @@ else
   #do
   #  ps aux | grep -i "./Server -loadscriptonce" | grep -v grep >/dev/null 2>&1
   #done
-
-  sleep 60
-  echo " Server started completely !!!!!!"
-  exit
+  #
 fi
