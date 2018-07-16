@@ -1,9 +1,9 @@
 FROM ubuntu:16.04
 ADD config.tar.gz /root/
 COPY files /root/files
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/init_gs
 ARG UBUNTU_APT_MIRROR_URL=
-RUN chmod a+x /usr/local/bin/docker-entrypoint \
+RUN chmod a+x /usr/local/bin/init_gs \
 	&& if [ ! -z "${UBUNTU_APT_MIRROR_URL}" ];then \
 		cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
 		sed  -i "s#archive.ubuntu.com#${UBUNTU_APT_MIRROR_URL}#g"  /etc/apt/sources.list; \
@@ -28,5 +28,5 @@ RUN chmod a+x /usr/local/bin/docker-entrypoint \
 	&& myodbc-installer -a -d -n "MySQL ODBC 5.3 Driver" -t "Driver=/usr/local/lib/libmyodbc5w.so" \
 	&& myodbc-installer -d -l
 EXPOSE 7384 3731
-ENTRYPOINT ["docker-entrypoint"]
+ENTRYPOINT ["init_gs"]
 CMD ["tail","-f","/dev/null"]
