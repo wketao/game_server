@@ -16,7 +16,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `web` /*!40100 DEFAULT CHARACTER SET utf8 */;
-use `web`;
+USE `web`;
 --
 -- Table structure for table `account`
 --
@@ -24,16 +24,20 @@ DROP TABLE IF EXISTS `account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `account` (
-  id        INT(11) NOT NULL AUTO_INCREMENT,
-  name      VARCHAR(32) NOT NULL,
-  password  CHAR(32) NOT NULL,
-  point     INT(11) NOT NULL DEFAULT 0,
-  is_online TINYINT(1) NOT NULL DEFAULT 0,
-  is_lock   TINYINT(1) NOT NULL DEFAULT 0,
-
-  PRIMARY   KEY (id, name),
-  UNIQUE    KEY id USING BTREE (id),
-  UNIQUE    KEY name (name)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `password` char(32) NOT NULL,
+  `question` varchar(64) DEFAULT NULL,
+  `answer` varchar(64) DEFAULT NULL,
+  `email` varchar(64) DEFAULT NULL,
+  `qq` varchar(16) DEFAULT NULL,
+  `tel` varchar(16) DEFAULT NULL,
+  `id_type` enum('IdCard') DEFAULT 'IdCard',
+  `id_card` varchar(32) DEFAULT NULL,
+  `point` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`,`name`),
+  UNIQUE KEY `id` (`id`) USING BTREE,
+  UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -48,6 +52,62 @@ LOCK TABLES `account` WRITE;
 --
 INSERT INTO `account` (`id`,`name`,`password`) VALUES (1,'test@game.sohu.com','e10adc3949ba59abbe56e057f20f883e');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pay`
+--
+
+DROP TABLE IF EXISTS `pay`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pay` (
+  `trade_no` varchar(20) NOT NULL,
+  `channel` varchar(10) DEFAULT NULL,
+  `server_id` int(11) NOT NULL,
+  `account_id` int(11) NOT NULL,
+  `fee` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `pay_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`trade_no`),
+  KEY `trade_no` (`trade_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pay`
+--
+
+LOCK TABLES `pay` WRITE;
+/*!40000 ALTER TABLE `pay` DISABLE KEYS */;
+INSERT INTO `pay` VALUES ('','bankpay',1,1,10,0,'2011-06-26 09:05:42',NULL),('20110626085922308','bankpay',1,1,1234,0,'2011-06-26 09:01:00',NULL),('2011062609010797','bankpay',1,1,1234,0,'2011-06-26 09:01:10',NULL);
+/*!40000 ALTER TABLE `pay` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `server`
+--
+
+DROP TABLE IF EXISTS `server`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `server` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(32) NOT NULL,
+  `host` char(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `server`
+--
+
+LOCK TABLES `server` WRITE;
+/*!40000 ALTER TABLE `server` DISABLE KEYS */;
+INSERT INTO `server` VALUES (1,'','192.168.200.3');
+/*!40000 ALTER TABLE `server` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
