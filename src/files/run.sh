@@ -7,7 +7,7 @@ else
   ###### start Billing Server ######
   cd /root/files/billing
   echo " start Billing Server ......"
-  ./Billing &
+  ./billing >/dev/null 2>&1 &
   sleep 5
   echo " Billing started completely !!!!!!"
   ###### start ShareMemory ######
@@ -45,6 +45,8 @@ else
   cd /home/tlbb/Server/
   echo " start Server ......"
   ./Server >/dev/null 2>&1
+  sleep 30
+  echo " Server started completely !!!!!!"
 
   #until
   #[ "$?" = "1" ]

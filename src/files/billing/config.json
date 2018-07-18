@@ -1,0 +1,11 @@
+{
+  "ip": "127.0.0.1",
+  "port": 12680,
+  "db_host": "127.0.0.1",
+  "db_port": 3306,
+  "db_user": "root",
+  "db_password": "root",
+  "db_name": "web",
+  "allow_ips": [],
+  "reg_code": "42ba4cc736caaae64b948b323bc3bb8c5c436e4a0062696c6c696e6720747269616c2076657273696f6e206c6963656e7365"
+}

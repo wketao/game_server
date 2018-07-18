@@ -25,7 +25,7 @@ echo " Login stoped completely !!!!!!"
 
 ###### stop Billing ######
 cd /root/files/billing
-./Billing stop
+./billing stop
 sleep 2
 echo " Billing stoped completely !!!!!!"
 
